@@ -1,0 +1,13 @@
+# Minimal requirements for Python 3.13
+# Uses SQLite instead of PostgreSQL
+
+fastapi
+uvicorn[standard]
+sqlalchemy
+alembic
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+pydantic
+pydantic-settings
+python-dotenv

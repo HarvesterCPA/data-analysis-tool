@@ -1,25 +1,14 @@
-from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text, Enum
+from sqlalchemy import Column, Integer, String, Float, DateTime, ForeignKey, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
-import enum
-
-class ExpenseCategory(str, enum.Enum):
-    FUEL = "fuel"
-    LABOR = "labor"
-    EQUIPMENT_LEASE = "equipment_lease"
-    EQUIPMENT_REPAIR = "equipment_repair"
-    EQUIPMENT_DEPRECIATION = "equipment_depreciation"
-    RENT_INTEREST = "rent_interest"
-    TAXES = "taxes"
-    OTHER = "other"
 
 class ExpenseEntry(Base):
     __tablename__ = "expense_entries"
 
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    category = Column(Enum(ExpenseCategory), nullable=False)
+    category = Column(String, nullable=False)  # Changed from Enum to String for SQLite
     amount = Column(Float, nullable=False)
     description = Column(String, nullable=True)
     notes = Column(Text, nullable=True)

@@ -1,13 +1,7 @@
-from sqlalchemy import Column, Integer, String, Boolean, DateTime, Enum
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql import func
 from app.core.database import Base
-import enum
-
-class BillingMethod(str, enum.Enum):
-    PER_ACRE = "per_acre"
-    PER_BUSHEL = "per_bushel"
-    PER_HOUR = "per_hour"
 
 class User(Base):
     __tablename__ = "users"
@@ -17,7 +11,7 @@ class User(Base):
     name = Column(String, nullable=False)
     hashed_password = Column(String, nullable=False)
     state = Column(String, nullable=False)
-    billing_method = Column(Enum(BillingMethod), nullable=False)
+    billing_method = Column(String, nullable=False)  # Changed from Enum to String for SQLite
     equipment_owned = Column(Boolean, default=True)
     equipment_details = Column(String, nullable=True)
     is_active = Column(Boolean, default=True)

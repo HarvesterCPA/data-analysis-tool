@@ -3,7 +3,7 @@ from typing import Optional
 
 class Settings(BaseSettings):
     # Database
-    DATABASE_URL: str = "postgresql://postgres:password@localhost:5432/harvester_tracking"
+    DATABASE_URL: str = "sqlite:///./harvester_tracking.db"
     
     # JWT
     SECRET_KEY: str = "your-secret-key-change-in-production"

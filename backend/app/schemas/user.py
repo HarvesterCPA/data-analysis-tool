@@ -1,7 +1,9 @@
 from pydantic import BaseModel, EmailStr
-from typing import Optional
+from typing import Optional, Literal
 from datetime import datetime
-from app.models.user import BillingMethod
+
+# Define billing method as a literal type for validation
+BillingMethod = Literal["per_acre", "per_bushel", "per_hour"]
 
 class UserBase(BaseModel):
     email: EmailStr

@@ -1,7 +1,9 @@
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, Literal
 from datetime import datetime
-from app.models.expense import ExpenseCategory
+
+# Define expense category as a literal type for validation
+ExpenseCategory = Literal["fuel", "labor", "equipment_lease", "equipment_repair", "equipment_depreciation", "rent_interest", "taxes", "other"]
 
 class ExpenseEntryBase(BaseModel):
     category: ExpenseCategory
