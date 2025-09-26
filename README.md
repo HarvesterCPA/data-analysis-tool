@@ -9,7 +9,7 @@ A web platform built with FastAPI (backend) and React (frontend) that allows cus
 - Personal profile setup with billing methods and location
 - Income and expense tracking
 - Dashboard with profit/loss summary
-- Basic peer comparison (state + national level)
+- Basic peer comparison (state, crop + national level)
 - Admin panel for user management
 
 ### Tech Stack
@@ -107,25 +107,10 @@ npm install
 npm start
 ```
 
-## 📚 Documentation
+## API Documentation
+Once the backend is running, visit `http://localhost:8000/docs` for interactive API documentation.
 
-- **Getting Started**: [GETTING_STARTED.md](GETTING_STARTED.md)
-- **Troubleshooting**: [TROUBLESHOOTING.md](TROUBLESHOOTING.md)
-- **API Reference**: [API.md](API.md)
-- **Development Guide**: [DEVELOPMENT.md](DEVELOPMENT.md)
-
-## 🌐 Access Points
-
-- **Frontend**: http://localhost:3000
-- **Backend API**: http://localhost:8000
-- **API Documentation**: http://localhost:8000/docs
-- **Demo Page**: http://localhost:3000/demo
-
-## 🗄️ Database Configuration
-
-### PostgreSQL (Default)
-- **Host**: localhost:5432
-- **Database**: harvester_tracking
-- **User**: postgres
-- **Password**: password (change in production)
-- **Requires**: PostgreSQL installation and setup
+## Development
+- Backend runs on `http://localhost:8000`
+- Frontend runs on `http://localhost:3000`
+- Database runs on `localhost:5432`
