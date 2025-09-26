@@ -9,7 +9,7 @@ A web platform built with FastAPI (backend) and React (frontend) that allows cus
 - Personal profile setup with billing methods and location
 - Income and expense tracking
 - Dashboard with profit/loss summary
-- Basic peer comparison (state + national level)
+- Basic peer comparison (state, crop + national level)
 - Admin panel for user management
 
 ### Tech Stack
