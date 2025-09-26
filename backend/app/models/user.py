@@ -28,3 +28,4 @@ class User(Base):
     # Relationships
     income_entries = relationship("IncomeEntry", back_populates="user")
     expense_entries = relationship("ExpenseEntry", back_populates="user")
+    harvest_seasons = relationship("HarvestSeason", back_populates="user")

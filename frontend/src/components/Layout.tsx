@@ -25,6 +25,7 @@ import {
   Person,
   AdminPanelSettings,
   Logout,
+  Agriculture,
 } from '@mui/icons-material';
 import { useAuth } from '../contexts/AuthContext';
 
@@ -58,6 +59,7 @@ export const Layout: React.FC = () => {
     { text: 'Dashboard', icon: <Dashboard />, path: '/dashboard' },
     { text: 'Income', icon: <AttachMoney />, path: '/income' },
     { text: 'Expenses', icon: <Receipt />, path: '/expenses' },
+    { text: 'Harvest Seasons', icon: <Agriculture />, path: '/harvest-seasons' },
     { text: 'Profile', icon: <Person />, path: '/profile' },
   ];
 

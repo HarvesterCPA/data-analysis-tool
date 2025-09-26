@@ -6,7 +6,7 @@ import uvicorn
 
 from app.core.config import settings
 from app.core.database import get_db
-from app.api import auth, users, income, expenses, analytics, admin
+from app.api import auth, users, income, expenses, analytics, admin, harvest_seasons, equipment, harvest_expenses, harvest_revenue, summary
 
 app = FastAPI(
     title="Harvester Tracking API",
@@ -30,6 +30,13 @@ app.include_router(income.router, prefix="/api/income", tags=["income"])
 app.include_router(expenses.router, prefix="/api/expenses", tags=["expenses"])
 app.include_router(analytics.router, prefix="/api/analytics", tags=["analytics"])
 app.include_router(admin.router, prefix="/api/admin", tags=["admin"])
+
+# Harvest Profit/Loss System
+app.include_router(harvest_seasons.router, prefix="/api/harvest-seasons", tags=["harvest-seasons"])
+app.include_router(equipment.router, prefix="/api/equipment", tags=["equipment"])
+app.include_router(harvest_expenses.router, prefix="/api/harvest-expenses", tags=["harvest-expenses"])
+app.include_router(harvest_revenue.router, prefix="/api/harvest-revenue", tags=["harvest-revenue"])
+app.include_router(summary.router, prefix="/api/summary", tags=["summary"])
 
 @app.get("/")
 async def root():
