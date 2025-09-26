@@ -1,9 +1,8 @@
 @echo off
-REM Harvester Tracking Platform Setup Script for Windows
-REM This script prioritizes PostgreSQL as the database
+REM Docker PostgreSQL Setup Script for Harvester Tracking Platform
 
-echo 🚀 Setting up Harvester Tracking Platform with PostgreSQL...
-echo =============================================================
+echo 🐘 Setting up Harvester Tracking Platform with Docker + PostgreSQL
+echo =================================================================
 echo.
 
 REM Check if Docker is installed
@@ -43,7 +42,7 @@ if not exist frontend\.env (
     copy frontend\env.example frontend\.env
 )
 
-REM Build and start services with PostgreSQL
+REM Build and start services
 echo 🔨 Building and starting services with PostgreSQL...
 docker-compose up --build -d
 
@@ -79,3 +78,4 @@ echo 💡 For local PostgreSQL setup: setup-postgresql.bat
 echo 💡 For PostgreSQL installation guide: POSTGRESQL_SETUP.md
 echo.
 pause
+

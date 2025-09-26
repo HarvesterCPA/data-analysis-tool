@@ -2,15 +2,21 @@ version: '3.8'
 
 services:
   postgres:
-    image: postgres:13
+    image: postgres:15
     environment:
       POSTGRES_DB: harvester_tracking
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d harvester_tracking"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   backend:
     build: ./backend
@@ -20,7 +26,8 @@ services:
       DATABASE_URL: postgresql://postgres:password@postgres:5432/harvester_tracking
       SECRET_KEY: your-secret-key-here
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
     volumes:
       - ./backend:/app
 
