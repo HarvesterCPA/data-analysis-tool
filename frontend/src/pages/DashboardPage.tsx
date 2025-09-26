@@ -19,9 +19,9 @@ import {
   AttachMoney,
   Receipt,
 } from '@mui/icons-material';
-import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from 'recharts';
 import { analyticsService } from '../services/analyticsService';
-import { AnalyticsResponse } from '../types';
+import { AnalyticsResponse, CategoryBreakdown } from '../types';
 
 const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8', '#82CA9D'];
 
@@ -156,7 +156,10 @@ export const DashboardPage: React.FC = () => {
                     cx="50%"
                     cy="50%"
                     labelLine={false}
-                    label={({ category, percentage }) => `${category} (${percentage.toFixed(1)}%)`}
+                    label={(props: any) => {
+                      const { category, percentage } = props;
+                      return `${category} (${percentage.toFixed(1)}%)`;
+                    }}
                     outerRadius={80}
                     fill="#8884d8"
                     dataKey="amount"

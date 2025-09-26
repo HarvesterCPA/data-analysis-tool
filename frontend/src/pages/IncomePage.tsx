@@ -11,10 +11,8 @@ import {
   Grid,
   Card,
   CardContent,
-  IconButton,
   Alert,
   CircularProgress,
-  Chip,
 } from '@mui/material';
 import { Add, Edit, Delete } from '@mui/icons-material';
 import { DataGrid, GridColDef, GridActionsCellItem } from '@mui/x-data-grid';
@@ -90,7 +88,7 @@ export const IncomePage: React.FC = () => {
         total_earned: parseFloat(formData.total_earned),
         client_name: formData.client_name || undefined,
         notes: formData.notes || undefined,
-        harvest_date: new Date(formData.harvest_date),
+        harvest_date: new Date(formData.harvest_date).toISOString(),
       };
 
       if (editingEntry) {
@@ -102,7 +100,17 @@ export const IncomePage: React.FC = () => {
       await fetchIncomeEntries();
       handleClose();
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to save income entry');
+      console.error('Income creation error:', err);
+      if (err.response?.data?.detail) {
+        // Handle validation errors
+        if (Array.isArray(err.response.data.detail)) {
+          setError(err.response.data.detail.map((e: any) => e.msg).join(', '));
+        } else {
+          setError(err.response.data.detail);
+        }
+      } else {
+        setError('Failed to save income entry');
+      }
     }
   };
 
@@ -118,7 +126,13 @@ export const IncomePage: React.FC = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'harvest_date', headerName: 'Date', width: 120, type: 'date' },
+    { 
+      field: 'harvest_date', 
+      headerName: 'Date', 
+      width: 120, 
+      type: 'date',
+      valueGetter: (params) => new Date(params.value)
+    },
     { field: 'acres_harvested', headerName: 'Acres', width: 100, type: 'number' },
     { field: 'rate_per_unit', headerName: 'Rate/Unit', width: 120, type: 'number' },
     { field: 'total_earned', headerName: 'Total', width: 120, type: 'number' },
@@ -258,7 +272,7 @@ export const IncomePage: React.FC = () => {
                   fullWidth
                   label="Rate per Unit"
                   type="number"
-                  step="0.01"
+                  inputProps={{ step: "0.01" }}
                   value={formData.rate_per_unit}
                   onChange={(e) => setFormData({ ...formData, rate_per_unit: e.target.value })}
                   required
@@ -269,7 +283,7 @@ export const IncomePage: React.FC = () => {
                   fullWidth
                   label="Total Earned"
                   type="number"
-                  step="0.01"
+                  inputProps={{ step: "0.01" }}
                   value={formData.total_earned}
                   onChange={(e) => setFormData({ ...formData, total_earned: e.target.value })}
                   required

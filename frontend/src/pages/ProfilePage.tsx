@@ -17,7 +17,6 @@ import {
   CircularProgress,
 } from '@mui/material';
 import { useAuth } from '../contexts/AuthContext';
-import { UserUpdate } from '../types';
 import { api } from '../services/api';
 
 const US_STATES = [

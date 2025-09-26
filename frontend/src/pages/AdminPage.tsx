@@ -68,7 +68,13 @@ export const AdminPage: React.FC = () => {
         />
       )
     },
-    { field: 'created_at', headerName: 'Created', width: 120, type: 'date' },
+    { 
+      field: 'created_at', 
+      headerName: 'Created', 
+      width: 120, 
+      type: 'date',
+      valueGetter: (params) => new Date(params.value)
+    },
   ];
 
   if (loading) {

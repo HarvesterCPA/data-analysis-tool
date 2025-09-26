@@ -5,9 +5,9 @@ from app.core.database import Base
 import enum
 
 class BillingMethod(str, enum.Enum):
-    PER_ACRE = "per_acre"
-    PER_BUSHEL = "per_bushel"
-    PER_HOUR = "per_hour"
+    per_acre = "per_acre"
+    per_bushel = "per_bushel"
+    per_hour = "per_hour"
 
 class User(Base):
     __tablename__ = "users"

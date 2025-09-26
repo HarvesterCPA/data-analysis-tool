@@ -49,6 +49,7 @@ export interface CategoryBreakdown {
   category: string;
   amount: number;
   percentage: number;
+  [key: string]: any; // Add index signature for Recharts compatibility
 }
 
 export interface PeerComparison {

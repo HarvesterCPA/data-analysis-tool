@@ -99,7 +99,7 @@ export const ExpensesPage: React.FC = () => {
         amount: parseFloat(formData.amount),
         description: formData.description || undefined,
         notes: formData.notes || undefined,
-        expense_date: new Date(formData.expense_date),
+        expense_date: new Date(formData.expense_date).toISOString(),
       };
 
       if (editingEntry) {
@@ -111,7 +111,17 @@ export const ExpensesPage: React.FC = () => {
       await fetchExpenseEntries();
       handleClose();
     } catch (err: any) {
-      setError(err.response?.data?.detail || 'Failed to save expense entry');
+      console.error('Expense creation error:', err);
+      if (err.response?.data?.detail) {
+        // Handle validation errors
+        if (Array.isArray(err.response.data.detail)) {
+          setError(err.response.data.detail.map((e: any) => e.msg).join(', '));
+        } else {
+          setError(err.response.data.detail);
+        }
+      } else {
+        setError('Failed to save expense entry');
+      }
     }
   };
 
@@ -127,7 +137,13 @@ export const ExpensesPage: React.FC = () => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'expense_date', headerName: 'Date', width: 120, type: 'date' },
+    { 
+      field: 'expense_date', 
+      headerName: 'Date', 
+      width: 120, 
+      type: 'date',
+      valueGetter: (params) => new Date(params.value)
+    },
     { field: 'category', headerName: 'Category', width: 150 },
     { field: 'amount', headerName: 'Amount', width: 120, type: 'number' },
     { field: 'description', headerName: 'Description', width: 200 },
@@ -276,7 +292,7 @@ export const ExpensesPage: React.FC = () => {
                   fullWidth
                   label="Amount"
                   type="number"
-                  step="0.01"
+                  inputProps={{ step: "0.01" }}
                   value={formData.amount}
                   onChange={(e) => setFormData({ ...formData, amount: e.target.value })}
                   required
